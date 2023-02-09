@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #
     "helpers",
     "users",
+    "questions",
 ]
 
 MIDDLEWARE = [

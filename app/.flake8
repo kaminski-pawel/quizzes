@@ -1,0 +1,10 @@
+[flake8]
+exclude = 
+    __pycache__,
+    migrations,
+    manage.py,
+    settings.py
+max-line-length = 88
+extend-ignore = 
+    # See https://github.com/PyCQA/pycodestyle/issues/373
+    E203

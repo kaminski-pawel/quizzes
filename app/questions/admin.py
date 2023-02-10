@@ -14,8 +14,12 @@ class AnswerInline(admin.StackedInline):
     }
 
 
+class ExplanationInline(admin.TabularInline):
+    model = Explanation
+
+
 class QuestionAdmin(admin.ModelAdmin):
-    inlines = [AnswerInline]
+    inlines = [AnswerInline, ExplanationInline]
     formfield_overrides = {
         models.CharField: {"widget": forms.Textarea(attrs={"rows": 5, "cols": 150})},
     }

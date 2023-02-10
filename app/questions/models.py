@@ -1,4 +1,5 @@
 from django.db import models
+from markdownx.models import MarkdownxField
 
 
 class QuestionSet(models.Model):
@@ -38,7 +39,8 @@ class Answer(models.Model):
 
 
 class Explanation(models.Model):
-    content = models.TextField(max_length=65535)
+    question = models.OneToOneField(Question, on_delete=models.CASCADE)
+    content = MarkdownxField()
 
     def __str__(self):
         return self.content

@@ -18,6 +18,7 @@ from django.urls import include, path
 from markdownx import urls as markdownx
 
 urlpatterns = [
+    path("questions/", include("questions.urls", namespace="questions")),
     path("admin/", admin.site.urls),
     path("markdownx/", include(markdownx)),
 ]

@@ -29,5 +29,6 @@
   },
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": ["--line-length=90"],
-  "isort.args": ["--profile", "black", "--line-length", "90"]
+  "isort.args": ["--profile", "black", "--line-length", "90"],
+  "python.analysis.typeCheckingMode": "basic"
 }

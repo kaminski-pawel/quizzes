@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block html-head %}
+  <script type="module" src="{% static 'js/_ui.bundle.js' %}"></script>
+{% endblock html-head %}
+
 {% block content %}
 
 <p>{{ object }}</p>
+<simple-greeting name="Webpack :D "></simple-greeting>
 <button onClick="window.location.reload();">Next</button>
 
 {% endblock %}

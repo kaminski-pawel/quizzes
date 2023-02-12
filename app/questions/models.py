@@ -21,7 +21,7 @@ class Question(models.Model):
         (CHECKBOX_INPUT, "CheckboxInput"),
     ]
 
-    questionSet = models.ForeignKey(QuestionSet, on_delete=models.CASCADE)
+    questionSet = models.ForeignKey(QuestionSet, related_name="questions", on_delete=models.CASCADE)
     content = models.CharField(max_length=65535)
     widget = models.CharField(max_length=2, choices=WIDGETS, default=CHECKBOX_INPUT)
 
@@ -30,7 +30,9 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(
+        Question, related_name="answers", on_delete=models.CASCADE
+    )
     content = models.CharField(max_length=65535)
     is_correct = models.BooleanField(default=False)
 

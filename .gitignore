@@ -132,6 +132,11 @@ dmypy.json
 
 ### JS #########################
 
+# Build code bundled by webpack
+
+_*.bundle.js
+_*.bundle.js.*
+
 # Logs
 logs
 *.log

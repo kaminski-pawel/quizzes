@@ -2,6 +2,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
+    next: "./views/next.js",
     ui: "./components/ui.js",
   },
   output: {

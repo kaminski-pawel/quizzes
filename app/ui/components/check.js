@@ -1,18 +1,23 @@
 import { LitElement, html } from "lit";
 
 export class CheckComponent extends LitElement {
-  static properties = {
-    targetUrl: { type: String },
-  };
-
   constructor() {
     super();
-    this.targetUrl = "";
+    this.onEnterPress();
+  }
+
+  createRenderRoot() {
+    return this;
   }
 
   render() {
     return html`
-      <button type="button" @click=${this.handleClick} class="btn btn-primary">
+      <button
+        type="button"
+        class="btn btn-secondary btn-lg"
+        style="position: absolute; bottom: 25%; right: 10%;"
+        @click=${this.handleClick}
+      >
         Check
       </button>
     `;
@@ -20,5 +25,18 @@ export class CheckComponent extends LitElement {
 
   handleClick(event) {
     console.log(event);
+  }
+
+  onEnterPress() {
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Enter") {
+          // window.location.href = '/zadania/utworz/';
+          console.log("Enter was pressed.");
+        }
+      },
+      false
+    );
   }
 }

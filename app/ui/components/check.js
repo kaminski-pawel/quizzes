@@ -24,7 +24,7 @@ export class CheckComponent extends LitElement {
   }
 
   handleClick(event) {
-    console.log(event);
+    this.checkAnswer();
   }
 
   onEnterPress() {
@@ -33,10 +33,15 @@ export class CheckComponent extends LitElement {
       (event) => {
         if (event.key === "Enter") {
           // window.location.href = '/zadania/utworz/';
-          console.log("Enter was pressed.");
+          this.checkAnswer();
         }
       },
       false
     );
   }
+
+  checkAnswer() {
+    console.log("checkAnswer");
+  }
 }
+customElements.define("ui-check-btn", CheckComponent);

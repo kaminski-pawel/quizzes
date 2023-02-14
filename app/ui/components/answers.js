@@ -26,6 +26,7 @@ export class AnswersComponent extends LitElement {
               type="${this.checkboxType}"
               name="ui-answers-checkbox"
               id="ui-answers-checkbox-${idx}"
+              @click=${() => this.handleClick(idx)}
             />
             <label class="form-check-label" for="ui-answers-checkbox-${idx}">
               <b>${idx + 1})</b>
@@ -37,4 +38,9 @@ export class AnswersComponent extends LitElement {
       )}
     `;
   }
+
+  handleClick(idx) {
+    console.log(`${idx} was selected`);
+  }
 }
+customElements.define("ui-answers", AnswersComponent);

@@ -18,3 +18,4 @@ export class ExplanationComponent extends LitElement {
     return html`<p style="visibility: hidden;">${this.explanation}</p>`;
   }
 }
+customElements.define("ui-explanation", ExplanationComponent);

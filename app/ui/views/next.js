@@ -1,9 +1,23 @@
-const { AnswersComponent } = require("./../components/answers");
-const { CheckComponent } = require("./../components/check");
-const { ExplanationComponent } = require("./../components/explanation");
-const { QuestionComponent } = require("./../components/question");
+import { LitElement, html } from "lit";
+import "./../components/answers";
+import "./../components/check";
+import "./../components/explanation";
+import "./../components/question";
 
-customElements.define("ui-answers", AnswersComponent);
-customElements.define("ui-check-btn", CheckComponent);
-customElements.define("ui-explanation", ExplanationComponent);
-customElements.define("ui-question", QuestionComponent);
+export class NextPage extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return html`
+      <div class="container">
+        <ui-question></ui-question>
+        <ui-answers></ui-answers>
+        <ui-check-btn></ui-check-btn>
+        <ui-explanation></ui-explanation>
+      </div>
+    `;
+  }
+}
+customElements.define("next-question-page", NextPage);

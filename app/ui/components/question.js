@@ -17,3 +17,4 @@ export class QuestionComponent extends LitElement {
     return html`<h3>${this.question}</h3>`;
   }
 }
+customElements.define("ui-question", QuestionComponent);

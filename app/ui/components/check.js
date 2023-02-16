@@ -1,8 +1,15 @@
 import { LitElement, html } from "lit";
 
 export class CheckComponent extends LitElement {
+  static properties = {
+    selected: { type: Array },
+    correct: { type: Array },
+  };
+
   constructor() {
     super();
+    this.selected = [];
+    this.setCorrect();
     this.onEnterPress();
   }
 
@@ -18,7 +25,7 @@ export class CheckComponent extends LitElement {
         style="position: absolute; bottom: 25%; right: 10%;"
         @click=${this.handleClick}
       >
-        Check
+        Check ${this.selected}
       </button>
     `;
   }
@@ -41,7 +48,25 @@ export class CheckComponent extends LitElement {
   }
 
   checkAnswer() {
-    console.log("checkAnswer");
+    const result = this.selected.every((v, i) => v === this.correct[i]);
+    this.dispatchEvent(
+      new CustomEvent("question-result", {
+        detail: { value: result },
+      })
+    );
+  }
+
+  /**
+   * Establish an array of id numbers of answers where is_correct=True.
+   * Set this.correct, for e.g. [4]
+   */
+  setCorrect() {
+    const data = JSON.parse(
+      document.getElementById("question-n-answers").textContent
+    );
+    this.correct = data.answers
+      .filter((answ) => answ.is_correct)
+      .map((answ) => answ.pk);
   }
 }
 customElements.define("ui-check-btn", CheckComponent);

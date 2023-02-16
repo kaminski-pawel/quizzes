@@ -11,7 +11,6 @@ export class ExplanationComponent extends LitElement {
       document.getElementById("question-n-answers").textContent
     );
     this.explanation = data.explanation.content;
-    console.log("this.explanation", this.explanation);
   }
 
   render() {

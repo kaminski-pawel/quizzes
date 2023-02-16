@@ -22,7 +22,7 @@ export class CheckComponent extends LitElement {
       <button
         type="button"
         class="btn btn-secondary btn-lg"
-        style="position: absolute; bottom: 25%; right: 10%;"
+        style="margin-top: 20px; margin-bottom: 20px;"
         @click=${this.handleClick}
       >
         Check ${this.selected}

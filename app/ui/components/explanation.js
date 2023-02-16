@@ -1,8 +1,11 @@
 import { LitElement, html } from "lit";
+import { styleMap } from "lit/directives/style-map.js";
+import { resolveMarkdown } from "lit-markdown";
 
 export class ExplanationComponent extends LitElement {
   static properties = {
     explanation: { type: String },
+    result: { type: Boolean | null },
   };
 
   constructor() {
@@ -13,8 +16,17 @@ export class ExplanationComponent extends LitElement {
     this.explanation = data.explanation.content;
   }
 
+  createRenderRoot() {
+    return this;
+  }
+
   render() {
-    return html`<p style="visibility: hidden;">${this.explanation}</p>`;
+    const style = { visibility: this.result === false ? "visible" : "hidden" };
+    return html`
+      <div style="${styleMap(style)}" class="alert alert-danger" role="alert">
+        ${resolveMarkdown(this.explanation)}
+      </div>
+    `;
   }
 }
 customElements.define("ui-explanation", ExplanationComponent);

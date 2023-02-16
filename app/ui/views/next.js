@@ -30,7 +30,7 @@ export class NextPage extends LitElement {
           @question-result="${this.questionResult}"
         ></ui-check-btn>
         <p>Result ${this.result}</p>
-        <ui-explanation></ui-explanation>
+        <ui-explanation .result="${this.result}"></ui-explanation>
       </div>
     `;
   }

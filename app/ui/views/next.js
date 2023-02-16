@@ -29,10 +29,10 @@ export class NextPage extends LitElement {
           .selected="${this.selected}"
           @question-result="${this.questionResult}"
         ></ui-check-btn>
-        <p>Result ${this.result}</p>
         <ui-explanation .result="${this.result}"></ui-explanation>
       </div>
     `;
+    // <p>Result ${this.result}</p>
   }
 
   answerSelected(e) {

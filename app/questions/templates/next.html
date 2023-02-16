@@ -2,13 +2,12 @@
 {% load static %}
 
 {% block html-head %}
-  <script type="module" src="{% static 'js/_ui.bundle.js' %}"></script>
+  <script type="module" src="{% static 'js/_next.bundle.js' %}"></script>
 {% endblock html-head %}
 
 {% block content %}
 
-<p>{{ object }}</p>
-<simple-greeting name="Webpack :D "></simple-greeting>
-<button onClick="window.location.reload();">Next</button>
+<next-question-page></next-question-page>
+<span>{{ qa|json_script:"question-n-answers" }}</span>
 
 {% endblock %}

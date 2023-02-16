@@ -1,4 +1,5 @@
 import { LitElement, html } from "lit";
+import "./../components/timer";
 
 export class CheckComponent extends LitElement {
   static properties = {
@@ -26,6 +27,7 @@ export class CheckComponent extends LitElement {
         @click=${this.handleClick}
       >
         Check ${this.selected}
+        <ui-timer></ui-timer>
       </button>
     `;
   }

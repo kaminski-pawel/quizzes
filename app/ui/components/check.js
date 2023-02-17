@@ -57,11 +57,19 @@ export class CheckComponent extends LitElement {
     this.isTimerStopped = true;
   }
 
+  isResultCorrect() {
+    return (
+      this.selected.length === this.correct.length &&
+      this.selected.every((v, i) => v === this.correct[i])
+    );
+  }
+
   checkAnswer() {
-    const result = this.selected.every((v, i) => v === this.correct[i]);
+    console.log("this.selected", this.selected);
+    console.log("this.correct", this.correct);
     this.dispatchEvent(
       new CustomEvent("question-result", {
-        detail: { value: result },
+        detail: { value: this.isResultCorrect() },
       })
     );
   }

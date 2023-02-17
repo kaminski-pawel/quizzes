@@ -13,7 +13,8 @@ export class ExplanationComponent extends LitElement {
     const data = JSON.parse(
       document.getElementById("question-n-answers").textContent
     );
-    this.explanation = data.explanation.content;
+    this.explanation =
+      data.explanation?.content || "<h1>❌</h1><h4>Wrong answer</h4>";
   }
 
   createRenderRoot() {
@@ -31,7 +32,7 @@ export class ExplanationComponent extends LitElement {
       <span>
         ${this.result === true
           ? html`<div class="alert alert-success" role="alert">
-              <h4 class="alert-heading">Well done!</h4>
+              <h4 class="alert-heading">Well done! 😀</h4>
             </div>`
           : ""}
         <div

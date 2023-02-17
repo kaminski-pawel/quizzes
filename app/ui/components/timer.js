@@ -4,6 +4,7 @@ const QUESTION_TIME_IN_SECONDS = 120; // 2 minutes
 
 export class TimerComponent extends LitElement {
   static properties = {
+    isTimerStopped: { type: Boolean },
     remainingTime: { type: Number },
     remainingMinutes: { type: Number },
     remainingSeconds: { type: Number },
@@ -36,9 +37,13 @@ export class TimerComponent extends LitElement {
 
   updateTime() {
     animationInterval(1000, this.controller.signal, (t) => {
-      --this.remainingTime;
-      this.remainingMinutes = this.getRemainingMinutes(this.remainingTime);
-      this.remainingSeconds = this.getRemainingSeconds(this.remainingTime);
+      if (this.remainingTime > 0 && !this.isTimerStopped) {
+        --this.remainingTime;
+        this.remainingMinutes = this.getRemainingMinutes(this.remainingTime);
+        this.remainingSeconds = this.getRemainingSeconds(this.remainingTime);
+      } else if (!this.isTimerStopped) {
+        location.reload();
+      }
     });
   }
 }

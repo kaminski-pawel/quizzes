@@ -3,6 +3,7 @@ import "./../components/timer";
 
 export class CheckComponent extends LitElement {
   static properties = {
+    isTimerStopped: { type: Boolean },
     selected: { type: Array },
     correct: { type: Array },
   };
@@ -10,6 +11,7 @@ export class CheckComponent extends LitElement {
   constructor() {
     super();
     this.selected = [];
+    this.isTimerStopped = false;
     this.setCorrect();
     this.onEnterPress();
   }
@@ -26,14 +28,15 @@ export class CheckComponent extends LitElement {
         style="margin-top: 20px; margin-bottom: 20px;"
         @click=${this.handleClick}
       >
-        Check ${this.selected}
-        <ui-timer></ui-timer>
+        Check
+        <ui-timer .isTimerStopped="${this.isTimerStopped}"></ui-timer>
       </button>
     `;
   }
 
   handleClick(event) {
     this.checkAnswer();
+    this.stopTimer();
   }
 
   onEnterPress() {
@@ -43,10 +46,15 @@ export class CheckComponent extends LitElement {
         if (event.key === "Enter") {
           // window.location.href = '/zadania/utworz/';
           this.checkAnswer();
+          this.stopTimer();
         }
       },
       false
     );
+  }
+
+  stopTimer() {
+    this.isTimerStopped = true;
   }
 
   checkAnswer() {

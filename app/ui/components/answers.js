@@ -13,12 +13,11 @@ export class AnswersComponent extends LitElement {
     );
     this.answers = data.answers;
     this.checkboxType = data.widget === "CM" ? "checkbox" : "radio";
-    // this.checkboxType = "checkbox";
   }
 
   render() {
     return html`
-      ${this.answers.map(
+      ${this.shuffle(this.answers).map(
         (answer, idx) => html`
           <div class="form-check">
             <input
@@ -30,7 +29,7 @@ export class AnswersComponent extends LitElement {
             />
             <label class="form-check-label" for="ui-answers-checkbox-${idx}">
               <b>${idx + 1})</b>
-              ${answer.content}
+              ${answer.content} ${answer.pk}
               <b> (${answer.is_correct})</b>
             </label>
           </div>
@@ -45,6 +44,14 @@ export class AnswersComponent extends LitElement {
         detail: { value: [pk] },
       })
     );
+  }
+
+  shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 }
 customElements.define("ui-answers", AnswersComponent);

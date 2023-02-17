@@ -21,11 +21,27 @@ export class ExplanationComponent extends LitElement {
   }
 
   render() {
-    const style = { visibility: this.result === false ? "visible" : "hidden" };
+    const failStyle = {
+      visibility: this.result === false ? "visible" : "hidden",
+    };
+    const successStyle = {
+      visibility: this.result === true ? "hidden" : "visible",
+    };
     return html`
-      <div style="${styleMap(style)}" class="alert alert-danger" role="alert">
-        ${resolveMarkdown(this.explanation)}
-      </div>
+      <span>
+        ${this.result === true
+          ? html`<div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Well done!</h4>
+            </div>`
+          : ""}
+        <div
+          style="${styleMap(failStyle)}"
+          class="alert alert-danger"
+          role="alert"
+        >
+          ${resolveMarkdown(this.explanation)}
+        </div>
+      </span>
     `;
   }
 }

@@ -1,5 +1,4 @@
 import { LitElement, html } from "lit";
-// import {withForm} from 'lit-form';
 
 export class AnswersComponent extends LitElement {
   static properties = {
@@ -32,8 +31,7 @@ export class AnswersComponent extends LitElement {
             />
             <label class="form-check-label" for="ui-answers-checkbox-${idx}">
               <b>${idx + 1})</b>
-              ${answer.content} ${answer.pk}
-              <b> (${answer.is_correct})</b>
+              ${answer.content}
             </label>
           </div>
         `

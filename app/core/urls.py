@@ -18,11 +18,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from markdownx import urls as markdownx
+from questions.views import TakeQuiz
 
 urlpatterns = [
     path("questions/", include("questions.urls", namespace="questions")),
     path("admin/", admin.site.urls),
     path("markdownx/", include(markdownx)),
+    path("", TakeQuiz.as_view(), name="root"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -8,7 +8,7 @@ Build service.
 docker-compose build
 ```
 
-Create and start containers.
+Create and start containers. The website should be availabe on `http://127.0.0.1:8000/`.
 
 ```console
 docker-compose up

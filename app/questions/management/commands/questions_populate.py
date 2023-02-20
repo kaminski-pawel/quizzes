@@ -21,26 +21,35 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        exam = QuestionSet.objects.get(title=options.get("exam"))
+        self.exam = QuestionSet.objects.get(title=options.get("exam"))
         for item in self._get_questions_list(options.get("file", "")):
-            question, created = Question.objects.get_or_create(
-                questionSet=exam,
-                content=item["content"],
-                widget=item["widget"],
-            )
+            question, created = self._get_or_create_question(item)
             if created:
-                Explanation.objects.create(
-                    question=question,
-                    content=item["explanation"]["content"],
-                )
-                for answ in item["answers"]:
-                    Answer.objects.create(
-                        question=question,
-                        content=answ["content"],
-                        is_correct=answ["is_correct"],
-                    )
+                self._create_explanation(question, item)
+                for answer in item["answers"]:
+                    self._create_answer(question, answer)
 
     def _get_questions_list(self, fp: str) -> t.List[t.Any]:
         with open(fp) as f:
             data = json.load(f)
         return data
+
+    def _get_or_create_question(self, item: t.Dict[str, t.Any]):
+        return Question.objects.get_or_create(
+            questionSet=self.exam,
+            content=item["content"],
+            widget=item["widget"],
+        )
+
+    def _create_explanation(self, question: Question, item: t.Dict[str, t.Any]):
+        Explanation.objects.create(
+            question=question,
+            content=item["explanation"]["content"],
+        )
+
+    def _create_answer(self, question: Question, answer: t.Dict[str, t.Any]):
+        Answer.objects.create(
+            question=question,
+            content=answer["content"],
+            is_correct=answer["is_correct"],
+        )

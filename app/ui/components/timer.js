@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-const QUESTION_TIME_IN_SECONDS = 120; // 2 minutes
+const QUESTION_TIME_IN_SECONDS = 130; // 2 minutes 10 seconds
 
 export class TimerComponent extends LitElement {
   static properties = {

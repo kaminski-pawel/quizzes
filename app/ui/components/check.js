@@ -58,10 +58,11 @@ export class CheckComponent extends LitElement {
   }
 
   isResultCorrect() {
-    return (
-      this.selected.length === this.correct.length &&
-      this.selected.every((v, i) => v === this.correct[i])
-    );
+    return this.compareArrays(this.selected, this.correct);
+    // return (
+    //   this.selected.length === this.correct.length &&
+    //   this.selected.every((v, i) => v === this.correct[i])
+    // );
   }
 
   checkAnswer() {
@@ -85,6 +86,13 @@ export class CheckComponent extends LitElement {
     this.correct = data.answers
       .filter((answ) => answ.is_correct)
       .map((answ) => answ.pk);
+  }
+
+  compareArrays(arr1, arr2) {
+    return (
+      arr1.length === arr2.length &&
+      arr1.every((a) => arr2.some((b) => a === b))
+    );
   }
 }
 customElements.define("ui-check-btn", CheckComponent);

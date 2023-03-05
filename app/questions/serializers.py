@@ -21,4 +21,4 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ["content", "widget", "answers", "explanation"]
+        fields = ["pk", "content", "widget", "answers", "explanation"]

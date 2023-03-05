@@ -1,7 +1,9 @@
 import { LitElement, html } from "lit";
+import "./../components/timer";
 
 export class CheckComponent extends LitElement {
   static properties = {
+    isTimerStopped: { type: Boolean },
     selected: { type: Array },
     correct: { type: Array },
   };
@@ -9,6 +11,7 @@ export class CheckComponent extends LitElement {
   constructor() {
     super();
     this.selected = [];
+    this.isTimerStopped = false;
     this.setCorrect();
     this.onEnterPress();
   }
@@ -25,13 +28,15 @@ export class CheckComponent extends LitElement {
         style="margin-top: 20px; margin-bottom: 20px;"
         @click=${this.handleClick}
       >
-        Check ${this.selected}
+        Check
+        <ui-timer .isTimerStopped="${this.isTimerStopped}"></ui-timer>
       </button>
     `;
   }
 
   handleClick(event) {
     this.checkAnswer();
+    this.stopTimer();
   }
 
   onEnterPress() {
@@ -41,17 +46,31 @@ export class CheckComponent extends LitElement {
         if (event.key === "Enter") {
           // window.location.href = '/zadania/utworz/';
           this.checkAnswer();
+          this.stopTimer();
         }
       },
       false
     );
   }
 
+  stopTimer() {
+    this.isTimerStopped = true;
+  }
+
+  isResultCorrect() {
+    return this.compareArrays(this.selected, this.correct);
+    // return (
+    //   this.selected.length === this.correct.length &&
+    //   this.selected.every((v, i) => v === this.correct[i])
+    // );
+  }
+
   checkAnswer() {
-    const result = this.selected.every((v, i) => v === this.correct[i]);
+    console.log("this.selected", this.selected);
+    console.log("this.correct", this.correct);
     this.dispatchEvent(
       new CustomEvent("question-result", {
-        detail: { value: result },
+        detail: { value: this.isResultCorrect() },
       })
     );
   }
@@ -67,6 +86,13 @@ export class CheckComponent extends LitElement {
     this.correct = data.answers
       .filter((answ) => answ.is_correct)
       .map((answ) => answ.pk);
+  }
+
+  compareArrays(arr1, arr2) {
+    return (
+      arr1.length === arr2.length &&
+      arr1.every((a) => arr2.some((b) => a === b))
+    );
   }
 }
 customElements.define("ui-check-btn", CheckComponent);

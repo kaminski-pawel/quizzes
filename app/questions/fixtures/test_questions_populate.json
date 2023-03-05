@@ -1,0 +1,36 @@
+[
+  {
+    "content": "Question 1",
+    "widget": "CI",
+    "answers": [
+      {
+        "content": "True answer.",
+        "is_correct": true
+      },
+      {
+        "content": "False answer.",
+        "is_correct": false
+      }
+    ],
+    "explanation": {
+      "content": "Explanations."
+    }
+  },
+  {
+    "content": "Question is already in the DB",
+    "widget": "CI",
+    "answers": [
+      {
+        "content": "Old true answer.",
+        "is_correct": true
+      },
+      {
+        "content": "Old false answer.",
+        "is_correct": false
+      }
+    ],
+    "explanation": {
+      "content": "..."
+    }
+  }
+]

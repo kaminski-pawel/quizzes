@@ -1,5 +1,21 @@
 # App for preparation for tech certifications
 
+## How to start
+
+1. First, create a superuser.
+
+```console
+docker-compose run --rm app sh -c "python manage.py createsuperuser"
+```
+
+1. Using the superuser credentials log to `http://127.0.0.1:8321/admin/questions/questionset/add/` and create new Question Set. In this example, I create `DVA-C02`.
+
+1. Populate the database using the json files stored in app/data. For example:
+
+```console
+docker-compose run --rm app sh -c "python manage.py questions_populate --file '/app/data/DVA-C02_2023-04.json' --exam DVA-C02"
+```
+
 ## Useful commands
 
 Build service.
